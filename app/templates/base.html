@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About Me</a></li>
+        <li><a href="{{ url_for('skills') }}">Skills</a></li>
+      </ul>
+    </nav>
+    
+    <div class="content">
+      <div class="left-column">
+        {% block content %}{% endblock %}
+      </div>
+      <div class="right-column">
+        <img src="{{ url_for('static', filename='images/picture.jpg') }}" alt="My Image">
+      </div>
+    </div>
+    
+    <div class="arrow-link">
+      <a href="{{ url_for('about') }}"><i class="fas fa-arrow-right"><h6> LEARN ABOUT ME</h6></i></a>
+    </div>
+    <script>
+      $(document).ready(function() {
+    var images = [ 'logo2.jpg', 'logo3.png'];
+    var currentIndex = 0;
+    var image = $('.right-column img');
+
+    setInterval(function() {
+        currentIndex++;
+        if(currentIndex == images.length) {
+            currentIndex = 0;
+        }
+        image.fadeOut(500, function() {
+            image.attr('src', '/static/images/' + images[currentIndex]).fadeIn(500);
+        });
+    }, 4000);
+});
+
+    </script>
+     
+  </body>
+</html>
